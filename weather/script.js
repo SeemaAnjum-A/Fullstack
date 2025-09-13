@@ -180,11 +180,11 @@ const cityCoords = {
 
 
 // Event Listener for button
-document.getElementById("fetchBtn").addEventListener("click", () => {
-  let city = document.getElementById("cityInput").value.toLowerCase();
+$("fetchBtn").addEventListener("click", () => {
+  let city =document.getElementById("cityInput").value.toLowerCase();
 
     if (!cityCoords[city]) {
-    document.getElementById("weather").innerHTML = "⚠ City not in list!";
+          document.getElementById("weather").innerHTML = "⚠ City not in list!";
     return;
   }
 

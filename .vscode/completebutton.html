@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>To Do List</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+    /* General Body Styling */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 40px;
+    }
+
+    /* Headings */
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      color: #666;
+      font-weight: normal;
+      margin-bottom: 20px;
+    }
+
+    /* Task List */
+    #list {
+      list-style-type: none;
+      padding: 0;
+      max-width: 400px;
+      margin: 0 auto 30px auto;
+    }
+
+    #list li {
+      background: #fff;
+      margin: 8px 0;
+      padding: 10px 15px;
+      border-left: 5px solid #4CAF50;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      text-align: left;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Completed task style */
+    #list li.completed {
+      background-color: #fff9c4; /* light yellow */
+      border-left-color: #ffeb3b; /* yellow border */
+      color: #666;
+      text-decoration: line-through;
+    }
+
+    /* Input and Button */
+    #myInput {
+      padding: 10px;
+      width: 250px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    #add {
+      padding: 10px 20px;
+      margin-left: 10px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #add:hover {
+      background-color: #45a049;
+    }
+
+    /* Complete button */
+    .complete-btn {
+      background-color: #ffeb3b;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #666;
+      user-select: none;
+    }
+
+    .complete-btn:hover {
+      background-color: #fdd835;
+    }
+  </style>
+</head>
+<body>
+  <h1>TO DO LIST</h1>
+  <h2>These are your tasks to complete</h2>
+
+  <ul id="list">
+    <li>Task1 <button class="complete-btn">Complete</button></li>
+    <li>Task2 <button class="complete-btn">Complete</button></li>
+    <li>Task3 <button class="complete-btn">Complete</button></li>
+  </ul>
+
+  <input type="text" id="myInput" placeholder="Enter new task" />
+  <button id="add">Add Task</button>
+
+  <script>
+    $(document).ready(function(){
+      // Add task with complete button
+      $("#add").click(function(){
+        let task = $("#myInput").val().trim();
+        if(task){
+          let newTask = $("<li></li>").text(task);
+          let completeBtn = $('<button class="complete-btn">Complete</button>');
+          newTask.append(" ").append(completeBtn);
+          $("#list").append(newTask);
+          $("#myInput").val(""); // Clear input
+        }
+      });
+
+      // Use event delegation to handle clicks on dynamically added buttons
+      $("#list").on("click", ".complete-btn", function(){
+        let li = $(this).parent();
+        li.toggleClass("completed");
+
+        // If completed, add a tick symbol, else remove it
+        if(li.hasClass("completed")){
+          // Add tick at the start if not already added
+          if(!li.find(".tick").length){
+            li.prepend('<span class="tick" style="color:green; margin-right:8px;">✔️</span>');
+          }
+          // Change button text to "Undo"
+          $(this).text("Undo");
+        } else {
+          li.find(".tick").remove();
+          // Change button text back to "Complete"
+          $(this).text("Complete");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

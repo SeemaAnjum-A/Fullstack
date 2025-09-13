@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        ul {
+            width: 200px;
+            margin: 20px auto;
+            padding: 0;
+            list-style-type: none;
+        }
+        li {
+            background: coral;
+            color: white;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        #myInput {
+            width: 160px;
+            padding: 10px;
+            margin-right: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #add {
+            padding: 10px 15px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #add:hover {
+            background: #218838;
+        }
+
+        .input-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <input type="text" id="myInput" placeholder="Enter a task">
+        <button id="add">Add</button>
+    </div>
+    
+    <ul id="list">
+        <li>task 1</li>
+        <li>task 2</li>
+        <li>task 3</li>
+    </ul>
+
+    <script>
+        $(document).ready(function(){
+            $("#add").click(function(){
+                let task = $("#myInput").val().trim();
+                if(task){
+                    $("#list").append("<li>" + task + "</li>");
+                    $("#myInput").val("");
+                } else {
+                    alert("Please enter a task");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

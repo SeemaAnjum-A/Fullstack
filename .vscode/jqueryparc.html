@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <title>To Do List</title>
+</head>
+<body>
+  <h1>TO DO LIST</h1>
+  <h2>These are your tasks to complete</h2>
+  <ul id="list">
+    <li>Task1</li>
+    <li>Task2</li>
+    <li>Task3</li>
+  </ul>
+  <input type="text" id="myInput" placeholder="Enter new task" />
+  <button id="add">Add Task</button>
+
+  <script>
+    $(document).ready(function(){
+      $("#add").click(function(){
+        let task = $("#myInput").val();
+        if(task){
+          $("#list").append("<li>" + task + "</li>");
+          $("#myInput").val(""); // Clear input after adding
+        }
+      });
+    });
+  </script>
+</body>
+</html>
