@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Editable To-Do List</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    ul { list-style-type: none; padding: 0; }
+    li { padding: 5px; cursor: pointer; }
+    input.edit-box { width: 90%; padding: 4px; }
+  </style>
+</head>
+<body>
+  <h2>My To-Do List</h2>
+  <ul id="todo-list">
+    <li>Learn JavaScript</li>
+    <li>Practice jQuery</li>
+    <li>Build a To-Do App</li>
+  </ul>
+
+  <script>
+    $(document).ready(function() {
+      // Handle double-click on task
+      $("#todo-list").on("dblclick", "li", function() {
+        let currentText = $(this).text(); // get current text
+        let input = $("<input type='text' class='edit-box'>").val(currentText);
+
+        // Replace li content with input
+        $(this).html(input);
+        input.focus();
+
+        // Save on Enter
+        input.keydown(function(e) {
+          if (e.key === "Enter") {
+            let newText = $(this).val();
+            $(this).parent().text(newText);
+          }
+        });
+
+        // Save on blur (clicking outside)
+        input.blur(function() {
+          let newText = $(this).val();
+          $(this).parent().text(newText);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
